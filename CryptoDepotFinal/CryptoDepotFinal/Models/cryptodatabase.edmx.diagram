@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e78a111223114522a4a2c5b8f4f16133" Name="Diagram1">
-        <EntityTypeShape EntityType="CryptoDepotFinal20180305024028_dbModel.cryptodatabase" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoDepotFinal20180305024028_dbModel.cryptodatabase" Width="1.5" PointX="2" PointY="0.5" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
