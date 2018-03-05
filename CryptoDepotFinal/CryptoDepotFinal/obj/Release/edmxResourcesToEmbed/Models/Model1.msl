@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cryptodepotModelStoreContainer" CdmEntityContainer="cryptodepotEntities">
+    <EntitySetMapping Name="crptodepots">
+      <EntityTypeMapping TypeName="cryptodepotModel.crptodepot">
+        <MappingFragment StoreEntitySet="crptodepot">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Currency_Name" ColumnName="Currency Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Trend__Today_" ColumnName="Trend (Today)" />
+          <ScalarProperty Name="Trend__This_Week_" ColumnName="Trend (This Week)" />
+          <ScalarProperty Name="Trend__This_month_" ColumnName="Trend (This month)" />
+          <ScalarProperty Name="Date_tracked" ColumnName="Date tracked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
