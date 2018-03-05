@@ -201,6 +201,24 @@
     <Compile Include="Models\crptodepot.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\cryptodatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cryptodatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cryptodatabase.cs">
+      <DependentUpon>cryptodatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cryptodatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cryptodatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cryptodatabase1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cryptodatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
@@ -228,6 +246,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\cryptodatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cryptodatabase.edmx</DependentUpon>
+      <LastGenOutput>cryptodatabase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\cryptodatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cryptodatabase.edmx</DependentUpon>
+      <LastGenOutput>cryptodatabase1.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -249,6 +277,13 @@
     </EntityDeploy>
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\cryptodatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>cryptodatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\cryptodatabase.edmx.diagram">
+      <DependentUpon>cryptodatabase.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CryptoDepotFinal20180305024028 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
