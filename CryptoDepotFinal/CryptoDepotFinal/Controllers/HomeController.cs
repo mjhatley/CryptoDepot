@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CryptoDepotFinal.Models;
 
 namespace CryptoDepotFinal.Controllers
 {
@@ -13,6 +14,8 @@ namespace CryptoDepotFinal.Controllers
     {
         public ActionResult Index()
         {
+            
+          
             return View();
         }
 
@@ -39,15 +42,14 @@ namespace CryptoDepotFinal.Controllers
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
 
-            string ApiText = rd.ReadToEnd();
-            string data = rd.ToString();
-            JObject o = JObject.Parse(ApiText);
+            string data = rd.ReadToEnd();
+            JObject o = JObject.Parse(data);
             
             
-            ViewBag.ApiText = "The Bitcoin is" + o["coins"];
+            ViewBag.ApiText = "The Bitcoin is" + o["coins"]["$$$"];
 
 
-
+            
 
             return View();
         }
