@@ -15,11 +15,7 @@ namespace CryptoDepotFinal
         {
             using (var webClient = new WebClient())
             {
-                //get a string representation of our json
-                string rawJSON = webClient.DownloadString("https://coinbin.org/coins");
-                //convert the JSON string to a string of objects
-                Models.CoinCollection coinCollection = JsonConvert.DeserializeObject<Models.CoinCollection>(rawJSON);
-                // Do some computation
+               
 
             }
         }
