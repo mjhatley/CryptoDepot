@@ -446,6 +446,8 @@
     <Content Include="Views\Home\GetData.cshtml" />
     <Content Include="Views\Home\Invest.cshtml" />
     <Content Include="Views\Home\GetCoins.cshtml" />
+    <Content Include="Views\Home\Risk.cshtml" />
+    <Content Include="Views\Home\GetCoinRisk.cshtml" />
     <Content Include="Views\Home\Questions.cshtml" />
     <Content Include="Views\Home\Results.cshtml" />
   </ItemGroup>
