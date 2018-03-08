@@ -32,22 +32,22 @@ namespace CryptoDepotFinal.Controllers
             //   return View();
         }
 
-        //public ActionResult Risk(double? risk)
-        //{
-        //    List<CoinDetail> TempData = GetCoinData();
+        public ActionResult Risk(double? risk)
+        {
+            List<CoinDetail> TempData = GetCoinData();
 
 
-        //    //This is where the data is sorted from the user imput.
-        //    List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= risk) select elt).ToList();
-
-        //    //Where(x => double.Parse(x.usd) >= amount);
-        //    if (risk! = null)
+            //This is where the data is sorted from the user imput.
+            List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= risk) select elt).ToList();
+            tp.ForEach(d=>d.stdv= GetCoinsSTDV(d.name));
+                //Where(x => double.Parse(x.usd) >= amount);
+            //if (risk! = null)
                 
-        //        return View(tp);
-        //    }
+                return View(tp);
+        }
 
-        //    else
-        //        return View(TempData);
+           
+   
 
 
 
@@ -70,15 +70,16 @@ namespace CryptoDepotFinal.Controllers
         //    return View();
         //}
 
-        public ActionResult Invest(double? amount)
+        public ActionResult Invest(GetSetData i)
         {
+           
 
             List<CoinDetail> TempData = GetCoinData();
 
-            List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= amount) select elt).ToList();
+            List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= i.Amount) select elt).ToList();
 
             //Where(x => double.Parse(x.usd) >= amount);
-            if (amount != null)
+            if (i.Amount != null)
             {
                 return View(tp);
             }
@@ -253,6 +254,15 @@ namespace CryptoDepotFinal.Controllers
             ViewBag.Period = i.Period;
             ViewBag.Risk = i.Risk;
             ViewBag.Growth = i.Growth;
+            return View();
+        }
+
+        public ActionResult GetCoinRisk()
+        {
+            List<string> cn = new List<string> { "611", "btc", "808", "brain", "bost" };
+            string risk = "";
+            cn.ForEach(c => risk += " >>>>>" + c + "=" + GetCoinsSTDV(c));
+            ViewBag.risk = risk;
             return View();
         }
 
