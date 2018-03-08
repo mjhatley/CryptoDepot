@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "GetCoins";
+}
+@model IEnumerable<CryptoDepotFinal.Models.CoinDetail>
+@ViewBag.Title ;
+@{ int i = 1; }
+<h2>Coins</h2>
+<!--//   -->
+<table class=" table">
+    <tr>
+        <th>
+            Btc
+
+        </th>
+        <th>
+            Name
+
+        </th>
+        <th>
+            ticker
+
+        </th>
+        <th>
+            Rank
+
+        </th>
+        <th>
+            usd
+
+        </th>
+    </tr>
+
+    @foreach (var act in Model.OrderBy(c => int.Parse(c.rank)))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(itemmodel => act.btc)
+            </td>
+            <td>
+                @Html.DisplayFor(itemmodel => act.name)
+            </td>
+            <td>
+                @Html.DisplayFor(itemmodel => act.ticker)
+            </td>
+            <td>
+                @Html.DisplayFor(itemmodel => act.rank)
+            </td>
+            <td>
+                @Html.DisplayFor(itemmodel => act.usd)
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>GetCoin</h2>
+

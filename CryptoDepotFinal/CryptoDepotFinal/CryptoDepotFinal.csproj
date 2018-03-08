@@ -253,6 +253,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CoinDetail.cs" />
     <Compile Include="Models\crptodepot.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -442,6 +443,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Data.cshtml" />
     <Content Include="Views\Home\GetData.cshtml" />
+    <Content Include="Views\Home\Invest.cshtml" />
+    <Content Include="Views\Home\GetCoins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
