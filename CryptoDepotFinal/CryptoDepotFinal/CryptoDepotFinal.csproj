@@ -275,6 +275,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>cryptodatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetSetData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
@@ -445,6 +446,8 @@
     <Content Include="Views\Home\GetData.cshtml" />
     <Content Include="Views\Home\Invest.cshtml" />
     <Content Include="Views\Home\GetCoins.cshtml" />
+    <Content Include="Views\Home\Questions.cshtml" />
+    <Content Include="Views\Home\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CryptoDepotFinal.Models;
-using System.Linq;
 namespace CryptoDepotFinal.Controllers
 {
     public class HomeController : Controller
@@ -16,8 +15,8 @@ namespace CryptoDepotFinal.Controllers
         public ActionResult Index()
         {
             lcn = GetCoinData();
-          return RedirectToAction("GetCoins") ;
-         //   return View();
+            return RedirectToAction("GetCoins");
+            //   return View();
         }
 
 
@@ -28,14 +27,14 @@ namespace CryptoDepotFinal.Controllers
 
             List<CoinDetail> TempData = GetCoinData();
 
-            List<CoinDetail> tp =( from elt in TempData.Where(x => double.Parse(x.usd) <= amount) select elt).ToList();
-            
+            List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= amount) select elt).ToList();
+
             //Where(x => double.Parse(x.usd) >= amount);
             if (amount != null)
             {
                 return View(tp);
             }
-                
+
             else
                 return View(TempData);
         }
@@ -81,12 +80,12 @@ namespace CryptoDepotFinal.Controllers
 
             //string data = rd.ReadToEnd();
             //JObject o = JObject.Parse(data);
-            
-            
+
+
             //ViewBag.ApiText = "The Bitcoin is" + o["coins"]["$$$"];
 
 
-            
+
 
             return View();
         }
@@ -129,7 +128,7 @@ namespace CryptoDepotFinal.Controllers
             return lcn;
         }
 
-            public ActionResult GetCoins()
+        public ActionResult GetCoins()
         {
             string url = "https://coinbin.org/coins";
             HttpWebRequest request = HttpWebRequest.CreateHttp(url);
@@ -151,7 +150,7 @@ namespace CryptoDepotFinal.Controllers
                 cn.btc = a["btc"].ToString();
                 cn.rank = a["rank"].ToString();
                 cn.ticker = a["ticker"].ToString();
-                cn.usd =  a["usd"].ToString();
+                cn.usd = a["usd"].ToString();
 
                 lcn.Add(cn);
 
@@ -161,6 +160,24 @@ namespace CryptoDepotFinal.Controllers
             return View(lcn);
 
         }
-    
+        public ActionResult Questions(GetSetData i)
+        {
+            ViewBag.Message = "Your Start page.";
+            ViewBag.Amount = i.Amount;
+            ViewBag.Period = i.Period;
+            ViewBag.Risk = i.Risk;
+            ViewBag.Growth = i.Growth;
+            return View();
+        }
+        public ActionResult Results(GetSetData i)
+        {
+            ViewBag.Message = "Your Start page.";
+            ViewBag.Amount = i.Amount;
+            ViewBag.Period = i.Period;
+            ViewBag.Risk = i.Risk;
+            ViewBag.Growth = i.Growth;
+            return View();
+        }
+
     }
 }
