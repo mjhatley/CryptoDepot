@@ -14,6 +14,7 @@ namespace CryptoDepotFinal.Models
         public string rank { get; set; }
         public string ticker { get; set; }
         public string usd { get; set; }
+        public double stdv { get; set; }
         public CoinDetail()
         {
 

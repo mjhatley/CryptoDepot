@@ -445,6 +445,8 @@
     <Content Include="Views\Home\GetData.cshtml" />
     <Content Include="Views\Home\Invest.cshtml" />
     <Content Include="Views\Home\GetCoins.cshtml" />
+    <Content Include="Views\Home\Risk.cshtml" />
+    <Content Include="Views\Home\GetCoinRisk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
