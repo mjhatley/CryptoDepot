@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CryptoDepotFinal.Models.CoinHistory>
+@ViewBag.Title ;
+@{ int i = 1; }
+<h2>Coins</h2>
+<!--//   -->
+<table class=" table">
+    <tr>
+        <th>
+
+            Timestamp
+
+        </th>
+
+        <th>
+
+            Value
+
+        </th>
+        <th>
+
+            Currency
+
+        </th>
+        <th>
+
+            When
+
+        </th>
+        
+    </tr>
+
+
+    @foreach (var act in Model)
+    {
+    <tr>
+        <td>
+
+            @Html.DisplayFor(itemmodel => act.timestamp)
+
+        </td>
+
+        <td>
+
+            @Html.DisplayFor(itemmodel => act.value)
+
+        </td>
+        <td>
+
+            @Html.DisplayFor(itemmodel => act.currency)
+
+        </td>
+        <td>
+
+            @Html.DisplayFor(itemmodel => act.when)
+
+        </td>
+       
+    </tr>
+    }
+</table>
+@i;

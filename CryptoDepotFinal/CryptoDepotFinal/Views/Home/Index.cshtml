@@ -1,33 +1,137 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model IEnumerable<CryptoDepotFinal.Models.Coin>
 
-@ViewBag.ApitText
+<div id="demo" class="carousel slide" data-ride="carousel">
 
-<div class="jumbotron">
-    <h1>ViewBag.ApiText</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.MUgzx_vaKtuwcuMgxxdgQQHaCz&pid=15.1&P=0&w=496&h=189" alt="Los Angeles" width="100%" height="400">
+        </div>
+        <div class="carousel-item">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.4UKdLBXGlTy_8R7_6JltQwHaDf&pid=15.1&P=0&w=365&h=172" alt="Chicago"  width="100%" height="400">
+        </div>
+        <div class="carousel-item">
+            <img src="ny.jpg" alt="New York"  width="100%" height="400">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+    <!-- ENd of carousel  and begin of top 10-->
+
+
+    <div class="row">
+        <div class="col-8">
+            <h3> Top 5 of the Currency</h3>
+            <table class=" table table-striped table-hover table-bordered" >
+                <tr>
+                    <th>
+                        Btc
+
+                    </th>
+                    <th>
+                        Name
+
+                    </th>
+                    <th>
+                        ticker
+
+                    </th>
+                    <th>
+                        Rank
+
+                    </th>
+                    <th>
+                        usd Value
+
+                    </th>
+                </tr>
+
+                @foreach (var act in Model.OrderBy(c => int.Parse(c.rank)))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(itemmodel => act.btc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemmodel => act.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemmodel => act.ticker)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemmodel => act.rank)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemmodel => act.usd)
+                        </td>
+                    </tr>
+                }
+            </table>
+
+<a class="btn btn-primary" href="Home/Getcoins"> See more coins</a>
+
+        </div>
+
+        <!-- ENd  of top 10-->
+
+        <div class="col">
+            <h3> Make a simulator</h3>
+            <p>Fill the form and click on Submit</p>
+            <form method="get" action="Home/Invest">
+                <p>Amount:</p>
+                <input name="Amount" type="number" />
+                <p>Risk:</p>
+                <select name="Risk" class="dropdown">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <br />
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </p>
+
+            </form>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="row">
+        <div class="col-4">
+            <h3>Need a Crash Course in Crypto Currency?</h3>
+            <p>
+                What is it? How does it work? What does it mean? All your basic questions are answered here.
+            </p>
+            <p><a class="btn btn-primary" href="http://localhost:56069/Home/About">Intro to Crypto &raquo;</a></p>
+
+        </div>
+
+        <div class="col-4">
+            <h3>Need a Crash Course in Crypto Currency?</h3>
+            <p>
+                What is it? How does it work? What does it mean? All your basic questions are answered here.
+            </p>
+            <p><a class="btn btn-primary" href="http://localhost:56069/Home/About">Intro to Crypto &raquo;</a></p>
+
+        </div>
+        <div class="col-4">
+            <h3>Need a Crash Course in Crypto Currency?</h3>
+            <p>
+                What is it? How does it work? What does it mean? All your basic questions are answered here.
+            </p>
+            <p><a class="btn btn-primary" href="http://localhost:56069/Home/About">Intro to Crypto &raquo;</a></p>
+
+        </div>
     </div>
-</div>

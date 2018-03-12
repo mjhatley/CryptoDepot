@@ -253,27 +253,30 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CoinDetail.cs" />
+    <Compile Include="Models\Coin.cs">
+      <DependentUpon>cryptodepotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CoinHistory.cs" />
     <Compile Include="Models\crptodepot.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cryptodatabase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cryptodatabase.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\cryptodatabase.cs">
-      <DependentUpon>cryptodatabase.tt</DependentUpon>
+      <DependentUpon>cryptodepotModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cryptodatabase.Designer.cs">
+    <Compile Include="Models\cryptodepotModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cryptodatabase.edmx</DependentUpon>
+      <DependentUpon>cryptodepotModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cryptodatabase1.cs">
+    <Compile Include="Models\cryptodepotModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cryptodatabase.tt</DependentUpon>
+      <DependentUpon>cryptodepotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cryptodepotModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cryptodepotModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSetData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -313,15 +316,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\cryptodatabase.Context.tt">
+    <Content Include="Models\cryptodepotModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cryptodatabase.edmx</DependentUpon>
-      <LastGenOutput>cryptodatabase.Context.cs</LastGenOutput>
+      <DependentUpon>cryptodepotModel.edmx</DependentUpon>
+      <LastGenOutput>cryptodepotModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\cryptodatabase.tt">
+    <Content Include="Models\cryptodepotModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cryptodatabase.edmx</DependentUpon>
-      <LastGenOutput>cryptodatabase1.cs</LastGenOutput>
+      <DependentUpon>cryptodepotModel.edmx</DependentUpon>
+      <LastGenOutput>cryptodepotModel.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -336,6 +339,13 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\cryptodepotModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>cryptodepotModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\cryptodepotModel.edmx.diagram">
+      <DependentUpon>cryptodepotModel.edmx</DependentUpon>
+    </Content>
     <None Include="ReadJson" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -343,13 +353,6 @@
     </EntityDeploy>
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\cryptodatabase.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>cryptodatabase.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\cryptodatabase.edmx.diagram">
-      <DependentUpon>cryptodatabase.edmx</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -450,6 +453,9 @@
     <Content Include="Views\Home\GetCoinRisk.cshtml" />
     <Content Include="Views\Home\Questions.cshtml" />
     <Content Include="Views\Home\Results.cshtml" />
+    <Content Include="Views\Home\GetCoinForecast.cshtml" />
+    <Content Include="Views\Home\GetCoinHistory.cshtml" />
+    <Content Include="Views\Home\GetLastValue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -462,6 +468,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\cryptodepo.tsx" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>

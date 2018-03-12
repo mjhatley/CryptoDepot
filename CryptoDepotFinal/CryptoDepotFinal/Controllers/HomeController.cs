@@ -24,30 +24,33 @@ namespace CryptoDepotFinal.Controllers
 
     public class HomeController : Controller
     {
-        List<CoinDetail> lcn = new List<CoinDetail>();
+        List<Coin> lcn = new List<Coin>();
+       CryptoDepotFinalEntities db = new   CryptoDepotFinalEntities();
+
         public ActionResult Index()
         {
             lcn = GetCoinData();
-            return RedirectToAction("GetCoins");
-            //   return View();
+            //return RedirectToAction("GetCoins");
+             return View(GetCoinsTop());
         }
 
-        //public ActionResult Risk(double? risk)
-        //{
-        //    List<CoinDetail> TempData = GetCoinData();
+        public ActionResult Risk(double? risk)
+        {
+          //  List<Coin> TempData = GetCoinData();
+           
+         
 
-
-        //    //This is where the data is sorted from the user imput.
-        //    List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= risk) select elt).ToList();
-
-        //    //Where(x => double.Parse(x.usd) >= amount);
-        //    if (risk! = null)
+            //This is where the data is sorted from the user imput.
+            List<Coin> tp = (from elt in db.Coins.Where(x =>  x.stdv  <= risk) select elt).ToList();
+           // tp.ForEach(d=>d.stdv= GetCoinsSTDV(d.name));
+                //Where(x => double.Parse(x.usd) >= amount);
+            //if (risk! = null)
                 
-        //        return View(tp);
-        //    }
+                return View(tp);
+        }
 
-        //    else
-        //        return View(TempData);
+           
+   
 
 
 
@@ -65,20 +68,33 @@ namespace CryptoDepotFinal.Controllers
         //    JObject o = JObject.Parse(data);
 
         //    List<JToken> coins = o["history"].ToList();
-        //    lcn = new List<CoinDetail>();
+        //    lcn = new List<Coin>();
         //    coins.
         //    return View();
         //}
 
-        public ActionResult Invest(double? amount)
+        public ActionResult Invest(GetSetData i)
         {
+           
 
-            List<CoinDetail> TempData = GetCoinData();
+            List<Coin> TempData = db.Coins.AsNoTracking().ToList();
 
-            List<CoinDetail> tp = (from elt in TempData.Where(x => double.Parse(x.usd) <= amount) select elt).ToList();
+
+            List<Coin> tp = TempData.Where(x => double.Parse(x.usd) <= i.Amount).ToList();
+            if (i.Risk.ToLower() == "low")
+                tp = tp.Where(x => x.stdv < 0.3).ToList();
+            else
+            if (i.Risk.ToLower() == "medium")
+                tp = tp.Where(x => x.stdv >= 0.3 && x.stdv <0.6).ToList();
+
+            else
+            if (i.Risk.ToLower() == "high")
+                tp = tp.Where(x => x.stdv >= 0.6).ToList();
+
+            //(from elt in db.Coins.Where(x => int.Parse( x.usd )< i.Amount) select elt).ToList();
 
             //Where(x => double.Parse(x.usd) >= amount);
-            if (amount != null)
+            if (i.Amount != null)
             {
                 return View(tp);
             }
@@ -144,7 +160,7 @@ namespace CryptoDepotFinal.Controllers
             return GetData();
         }
 
-        public List<CoinDetail> GetCoinData()
+        public List<Coin> GetCoinData()
         {
             string url = "https://coinbin.org/coins";
             HttpWebRequest request = HttpWebRequest.CreateHttp(url);
@@ -156,12 +172,12 @@ namespace CryptoDepotFinal.Controllers
             JObject o = JObject.Parse(data);
 
             List<JToken> coins = o["coins"].ToList();
-            lcn = new List<CoinDetail>();
-            CoinDetail cn;
+            lcn = new List<Coin>();
+            Coin cn;
             foreach (var elt in o["coins"])
             {
                 JToken a = elt.First();
-                cn = new CoinDetail();
+                cn = new Coin();
                 cn.name = a["name"].ToString();
                 cn.btc = a["btc"].ToString();
                 cn.rank = a["rank"].ToString();
@@ -205,7 +221,11 @@ namespace CryptoDepotFinal.Controllers
         {
             return View(GetCoinData());
         }
-            public ActionResult GetCoins1()
+        public List<Coin> GetCoinsTop()
+        {
+            return  lcn.OrderBy(f=>int.Parse( f.rank)).Take(5).ToList();
+        }
+        public ActionResult GetCoins1()
         {
             string url = "https://coinbin.org/coins";
             HttpWebRequest request = HttpWebRequest.CreateHttp(url);
@@ -217,12 +237,12 @@ namespace CryptoDepotFinal.Controllers
             JObject o = JObject.Parse(data);
 
             List<JToken> coins = o["coins"].ToList();
-            lcn = new List<CoinDetail>();
-            CoinDetail cn;
+            lcn = new List<Coin>();
+            Coin cn;
             foreach (var elt in o["coins"])
             {
                 JToken a = elt.First();
-                cn = new CoinDetail();
+                cn = new Coin();
                 cn.name = a["name"].ToString();
                 cn.btc = a["btc"].ToString();
                 cn.rank = a["rank"].ToString();
@@ -237,15 +257,15 @@ namespace CryptoDepotFinal.Controllers
             return View(lcn);
 
         }
-        public ActionResult Questions(GetSetData i)
-        {
-            ViewBag.Message = "Your Start page.";
-            ViewBag.Amount = i.Amount;
-            ViewBag.Period = i.Period;
-            ViewBag.Risk = i.Risk;
-            ViewBag.Growth = i.Growth;
-            return View();
-        }
+        //public ActionResult Questions(GetSetData i)
+        //{
+        //    ViewBag.Message = "Your Start page.";
+        //    ViewBag.Amount = i.Amount;
+        //    ViewBag.Period = i.Period;
+        //    ViewBag.Risk = i.Risk;
+        //    ViewBag.Growth = i.Growth;
+        //    return View();
+        //}
         public ActionResult Results(GetSetData i)
         {
             ViewBag.Message = "Your Start page.";
@@ -256,5 +276,131 @@ namespace CryptoDepotFinal.Controllers
             return View();
         }
 
+        public ActionResult GetCoinRisk()
+        {
+            List<string> cn = new List<string> { "611", "btc", "808", "brain", "bost" };
+            string risk = "";
+            cn.ForEach(c => risk += " >>>>>" + c + "=" + GetCoinsSTDV(c));
+            ViewBag.risk = risk;
+            return View();
+
+            ; }
+            public ActionResult GetCoinForecast(string coin)
+
+            {
+
+                //    try
+
+                //    {
+
+                string url = "https://coinbin.org/" + coin + "/forecast"; HttpWebRequest request = HttpWebRequest.CreateHttp(url);
+
+                request.UserAgent = @"User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41";
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse(); StreamReader rd = new StreamReader(response.GetResponseStream());
+
+                string data = rd.ReadToEnd();
+
+                JObject o = JObject.Parse(data); List<JToken> coins = o["forecast"].ToList();
+
+                List<CoinHistory> lh = new List<CoinHistory>();
+
+                CoinHistory hist = new CoinHistory();
+
+                //we stop when there is not history
+
+                //if (coins.Count == 0)
+
+                foreach (var item in coins)
+
+                {
+
+                    hist = new CoinHistory();
+
+                    //hist.currency = item["value.currency"].ToString();
+
+                    hist.value = double.Parse(item["usd"].ToString());
+
+                    hist.when = item["when"].ToString();
+
+                    hist.timestamp = DateTime.Parse(item["timestamp"].ToString()); lh.Add(hist);
+                }            // double lastv = double.Parse(coins.OrderByDescending(f => f["timestamp"]).First()["value"].ToString());
+
+                return View(lh);            //}
+
+                //catch (Exception)
+
+                //{
+
+                //    return View();
+
+                //}
+
+            }
+        public ActionResult Questions()
+        {
+            return View();
+        }
+         public ActionResult GetCoinHistory(string coin)
+
+            {
+
+                //    try
+
+                //    {
+
+                string url = "https://coinbin.org/" + coin + "/history"; HttpWebRequest request = HttpWebRequest.CreateHttp(url);
+
+                request.UserAgent = @"User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41";
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+
+
+                StreamReader rd = new StreamReader(response.GetResponseStream());
+
+                string data = rd.ReadToEnd();
+
+                JObject o = JObject.Parse(data); List<JToken> coins = o["history"].ToList();
+
+                List<CoinHistory> lh = new List<CoinHistory>();
+
+                CoinHistory hist = new CoinHistory();
+
+                //we stop when there is not history
+
+                //if (coins.Count == 0)
+
+                foreach (var item in coins)
+
+                {
+
+                    hist = new CoinHistory();
+
+                    hist.currency = item["value.currency"].ToString();
+
+                    hist.value = double.Parse(item["value"].ToString());
+
+                    hist.when = item["when"].ToString();
+
+                    hist.timestamp = DateTime.Parse(item["timestamp"].ToString()); lh.Add(hist);
+
+
+
+                }               // double lastv = double.Parse(coins.OrderByDescending(f => f["timestamp"]).First()["value"].ToString());
+
+                return View(lh);            //}
+
+                //catch (Exception)
+
+                //{
+
+                //    return View();
+
+                //}
+
+            }
+        }
+
     }
-}
+

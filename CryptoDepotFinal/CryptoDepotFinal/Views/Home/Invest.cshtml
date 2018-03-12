@@ -2,7 +2,7 @@
 @*@{
     ViewBag.Title = "GetCoins";
 }*@
-@model IEnumerable<CryptoDepotFinal.Models.CoinDetail>
+@model IEnumerable<CryptoDepotFinal.Models.Coin>
 @ViewBag.Title ;
 @{ int i = 1; }
 <h2>Coins</h2>
@@ -29,27 +29,34 @@
             usd
 
         </th>
+        <th>
+            Deviation
+        </th>
     </tr>
 
     @foreach (var act in Model.OrderBy(c => int.Parse(c.rank)))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(itemmodel => act.btc)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.name)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.ticker)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.rank)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.usd)
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(itemmodel => act.btc)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.name)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.ticker)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.rank)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.usd)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.stdv)
+        </td>
+
+    </tr>
     }
 </table>
 

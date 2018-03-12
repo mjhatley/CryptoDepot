@@ -13,10 +13,10 @@ namespace CryptoDepotFinal.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CryptoDepotFinal20180305024028_dbEntities : DbContext
+    public partial class CryptoDepotFinalEntities : DbContext
     {
-        public CryptoDepotFinal20180305024028_dbEntities()
-            : base("name=CryptoDepotFinal20180305024028_dbEntities")
+        public CryptoDepotFinalEntities()
+            : base("name=CryptoDepotFinalEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace CryptoDepotFinal.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Coin> Coins { get; set; }
         public virtual DbSet<cryptodatabase> cryptodatabases { get; set; }
     }
 }

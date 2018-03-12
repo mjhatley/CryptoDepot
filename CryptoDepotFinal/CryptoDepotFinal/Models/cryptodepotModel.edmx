@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="CryptoDepotFinal20180305024028_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Coin">
+          <Key>
+            <PropertyRef Name="ticker" />
+          </Key>
+          <Property Name="ticker" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="btc" Type="nvarchar" MaxLength="25" />
+          <Property Name="name" Type="nvarchar" MaxLength="25" />
+          <Property Name="rank" Type="nvarchar" MaxLength="5" />
+          <Property Name="usd" Type="nvarchar" MaxLength="20" />
+          <Property Name="stdv" Type="float" />
+        </EntityType>
         <EntityType Name="cryptodatabase">
           <Key>
             <PropertyRef Name="ID" />
@@ -18,6 +29,7 @@
           <Property Name="Date tracked" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CryptoDepotFinal20180305024028_dbModelStoreContainer">
+          <EntitySet Name="Coin" EntityType="Self.Coin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cryptodatabase" EntityType="Self.cryptodatabase" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -25,6 +37,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CryptoDepotFinal20180305024028_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Coin">
+          <Key>
+            <PropertyRef Name="ticker" />
+          </Key>
+          <Property Name="ticker" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="btc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="rank" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="usd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="stdv" Type="Double" />
+        </EntityType>
         <EntityType Name="cryptodatabase">
           <Key>
             <PropertyRef Name="ID" />
@@ -37,7 +60,8 @@
           <Property Name="Trend__This_month_" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Date_tracked" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="CryptoDepotFinal20180305024028_dbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CryptoDepotFinalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coins" EntityType="Self.Coin" />
           <EntitySet Name="cryptodatabases" EntityType="Self.cryptodatabase" />
         </EntityContainer>
       </Schema>
@@ -45,7 +69,19 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CryptoDepotFinal20180305024028_dbModelStoreContainer" CdmEntityContainer="CryptoDepotFinal20180305024028_dbEntities">
+        <EntityContainerMapping StorageEntityContainer="CryptoDepotFinal20180305024028_dbModelStoreContainer" CdmEntityContainer="CryptoDepotFinalEntities">
+          <EntitySetMapping Name="Coins">
+            <EntityTypeMapping TypeName="CryptoDepotFinal20180305024028_dbModel.Coin">
+              <MappingFragment StoreEntitySet="Coin">
+                <ScalarProperty Name="ticker" ColumnName="ticker" />
+                <ScalarProperty Name="btc" ColumnName="btc" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="usd" ColumnName="usd" />
+                <ScalarProperty Name="stdv" ColumnName="stdv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="cryptodatabases">
             <EntityTypeMapping TypeName="CryptoDepotFinal20180305024028_dbModel.cryptodatabase">
               <MappingFragment StoreEntitySet="cryptodatabase">

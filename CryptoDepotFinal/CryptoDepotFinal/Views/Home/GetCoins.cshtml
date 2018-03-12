@@ -2,12 +2,11 @@
 @{
     ViewBag.Title = "GetCoins";
 }
-@model IEnumerable<CryptoDepotFinal.Models.CoinDetail>
-@ViewBag.Title ;
-@{ int i = 1; }
-<h2>Coins</h2>
+@model IEnumerable<CryptoDepotFinal.Models.Coin>
+ 
+<h2>List of all Currency</h2>
 <!--//   -->
-<table class=" table">
+<table class=" table table-striped table-hover table-bordered">
     <tr>
         <th>
             Btc
@@ -29,29 +28,44 @@
             usd
 
         </th>
+        <th>
+            History
+
+        </th>
+        <th>
+            Forcast
+
+        </th>
     </tr>
 
     @foreach (var act in Model.OrderBy(c => int.Parse(c.rank)))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(itemmodel => act.btc)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.name)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.ticker)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.rank)
-            </td>
-            <td>
-                @Html.DisplayFor(itemmodel => act.usd)
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(itemmodel => act.btc)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.name)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.ticker)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.rank)
+        </td>
+        <td>
+            @Html.DisplayFor(itemmodel => act.usd)
+        </td>
+
+        <td>
+            @Html.ActionLink("History","GetCoinHistory", new { coin = act.ticker },"Home")
+           
+        </td>
+        <td>
+            @Html.ActionLink("Forecast", "GetCoinForecast", new { coin = act.ticker }, "Home")
+            
+        </td>
+    </tr>
     }
 </table>
-
-<h2>GetCoin</h2>
 
