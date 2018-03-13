@@ -237,34 +237,9 @@ namespace CryptoDepotFinal.Controllers
 
 
 
-        //public ActionResult Questions(GetSetData i)
-        //{
-        //    ViewBag.Message = "Your Start page.";
-        //    ViewBag.Amount = i.Amount;
-        //    ViewBag.Period = i.Period;
-        //    ViewBag.Risk = i.Risk;
-        //    ViewBag.Growth = i.Growth;
-        //    return View();
-        //}
-        //public ActionResult Results(GetSetData i)
-        //{
-        //    ViewBag.Message = "Your Start page.";
-        //    ViewBag.Amount = i.Amount;
-        //    ViewBag.Period = i.Period;
-        //    ViewBag.Risk = i.Risk;
-        //    ViewBag.Growth = i.Growth;
-        //    return View();
-        //}
+        
 
-        //public ActionResult GetCoinRisk()
-        //{
-        //    List<string> cn = new List<string> { "611", "btc", "808", "brain", "bost" };
-        //    string risk = "";
-        //    cn.ForEach(c => risk += " >>>>>" + c + "=" + GetCoinsSTDV(c));
-        //    ViewBag.risk = risk;
-        //    return View();
-
-        //}
+        
         public ActionResult GetCoinForecast(string coin)
         {
 
