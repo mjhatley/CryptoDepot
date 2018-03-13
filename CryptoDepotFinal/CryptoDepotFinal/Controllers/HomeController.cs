@@ -26,7 +26,7 @@ namespace CryptoDepotFinal.Controllers
     {
         List<Coin> lcn = new List<Coin>();
        CryptoDepotFinalEntities db = new   CryptoDepotFinalEntities();
-
+        int NberPerPage = 50;
         public ActionResult Index()
         {
             lcn = GetCoinData();
@@ -217,9 +217,24 @@ namespace CryptoDepotFinal.Controllers
         }
 
 
-        public ActionResult GetCoins()
+        public ActionResult GetCoins(string Name="", int page =1)
         {
-            return View(GetCoinData());
+            List<Coin> data = GetCoinData().OrderBy(d=> int.Parse(d.rank)).ToList();
+
+            ViewBag.Name = Name;
+            ViewBag.NberPerPage = NberPerPage;
+
+            if (Name.Length>1)
+            {
+                data = data.Where(k => k.name.ToLower().StartsWith(Name.ToLower())).ToList();
+            }
+
+  ViewBag.Number = data.Count();
+
+            data = data.Skip(NberPerPage * (page - 1)).Take(NberPerPage).ToList();
+
+          
+           return View(data);
         }
         public List<Coin> GetCoinsTop()
         {
