@@ -82,7 +82,7 @@
     @for (int i = 1; i < ViewBag.Number; i= i + ViewBag.NberPerPage)
     {
         j = i / ViewBag.NberPerPage +1;
-    <il class="page-item">@Html.ActionLink(""+@j,"GetCoins", "Home", new {page = @j, name =ViewBag.Name }, new { @class ="page-link"})  </il>
+    <il class="page-item">@Html.ActionLink(""+@j,"GetCoins", "Home", new {page = @j, Name =ViewBag.Name }, new { @class ="page-link"})  </il>
     }
 
 </ul>
