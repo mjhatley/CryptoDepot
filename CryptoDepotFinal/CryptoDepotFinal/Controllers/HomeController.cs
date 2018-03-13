@@ -212,7 +212,7 @@ namespace CryptoDepotFinal.Controllers
             ViewBag.NberPerPage = NberPerPage;
 
             //This is the search bar
-            if (Name.Length > 1)
+            if (Name.Length > 0)
             {
                 //if someone has typed the name of a coin in then we filter by that input and then return the list of coins that start with the input
                 data = data.Where(k => k.name.ToLower().StartsWith(Name.ToLower())).ToList();
