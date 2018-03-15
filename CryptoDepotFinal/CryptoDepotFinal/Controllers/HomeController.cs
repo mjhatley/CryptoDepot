@@ -157,7 +157,9 @@ namespace CryptoDepotFinal.Controllers
             //iterate through the Jtoken object and create a new coin object and add it to the list of coins (Lcn)
             foreach (var elt in o["coins"])
             {
+                //points at the first item
                 JToken a = elt.First();
+               //constructor for new "coin"
                 cn = new Coin();
                 cn.name = a["name"].ToString();
                 cn.btc = a["btc"].ToString();
@@ -166,6 +168,8 @@ namespace CryptoDepotFinal.Controllers
                 cn.usd = a["usd"].ToString();
 
                 lcn.Add(cn);
+
+
 
             }
 
@@ -289,7 +293,7 @@ namespace CryptoDepotFinal.Controllers
 
             CoinHistory hist = new CoinHistory();
 
-            //we stop when there is not history
+            //we stop when there is no history
 
             //if (coins.Count == 0)
 
@@ -306,8 +310,9 @@ namespace CryptoDepotFinal.Controllers
                 hist.when = item["when"].ToString();
 
                 hist.timestamp = DateTime.Parse(item["timestamp"].ToString()); lh.Add(hist);
-            }            
+            }
             //Returns the list of history
+            ViewBag.Name = coin;
             return View(lh);
             //}
             //catch (Exception)
@@ -368,7 +373,7 @@ namespace CryptoDepotFinal.Controllers
 
 
             }               // double lastv = double.Parse(coins.OrderByDescending(f => f["timestamp"]).First()["value"].ToString());
-
+            ViewBag.Name = coin;
             return View(lh);            //}
 
             //catch (Exception)

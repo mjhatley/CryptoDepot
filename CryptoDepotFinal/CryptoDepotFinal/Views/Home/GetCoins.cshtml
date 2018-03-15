@@ -9,17 +9,14 @@
 <p>
     Search by Currency
     <form action="GetCoins" method="post">
-        <input type="search" name="Name" value=@ViewBag.Name >
+        <input type="search" name="Name" required value=@ViewBag.Name  >
         <input type="submit" value="Search" />
 </p>
 </form>
 <!--//   -->
 <table class=" table table-striped table-hover table-bordered">
     <tr>
-        <th>
-            Btc
-
-        </th>
+        
         <th>
             Name
 
@@ -33,7 +30,7 @@
 
         </th>
         <th>
-            usd
+            Value (USD)
 
         </th>
         <th>
@@ -49,9 +46,7 @@
     @foreach (var act in Model.OrderBy(c => int.Parse(c.rank)))
     {
         <tr>
-            <td>
-                @Html.DisplayFor(itemmodel => act.btc)
-            </td>
+            
             <td>
                 @Html.DisplayFor(itemmodel => act.name)
             </td>
